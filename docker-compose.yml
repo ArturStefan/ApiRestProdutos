@@ -1,0 +1,22 @@
+version: '2'
+
+services:
+  app:
+    image: 'apiprodutos'
+    build:
+      context: .
+    container_name: app
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/produtos_apirest
+      - SPRING_DATASOURCE_USERNAME=docker
+      - SPRING_DATASOURCE_PASSWORD=docker
+      - SPRING_JPA_HIBERNATE_DDL-AUTO=update
+  db:
+    image: 'postgres:13.1-alpine'
+    container_name: db
+    environment:
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_DB=produtos_apirest
